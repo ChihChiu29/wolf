@@ -1,0 +1,13 @@
+这是一个单机的模拟多人的“狼人杀”的游戏：
+- 所有的bot都是local LLM（Ollama）控制的，并且都有自己的personality。
+- 游戏是对话框选择的界面，用HTML5, served by static content server。
+- 游戏允许建立和删除"Personality"文件（控制AI玩狼人杀的性格，比如是否话多，有没有习惯的小动作，什么样的tone向其他玩家搭话，等等）
+- 玩游戏时，玩家选择personality文件和人数（最好每个bot时不一样的personality）
+- 游戏开始后，每一轮白天是“自由活动”时间，这个时候每个（按顺序）bot都会根据自己的personality选择动作，可以是表情，小动作，向玩家或其他bot提问，等等
+- 轮到玩家时，玩家可以“观察”其他bot的行为（表情，小动作），也可以向bot提问
+- 每个bot有自己的memory file，记录当此游戏的相关信息（关于其他bot和玩家的知识，自己目前的形式判断，自己这一局的身份，等等）。这个文件是in memory，只在游戏进行中有，但是可以跨越多个连续的游戏。（当然，memory要适当summarize，但保留关键信息）
+- 当没有bot或玩家再提问，或太多提问（比如50个对话），game master会要求进入黑夜
+- 黑夜中，狼人bot依次投票（根据自己的memory，personality，等等，作为prompt context）
+- 投票结束后game master宣布结果，然后继续
+- 当轮到bot行动时，bot要先思考，这时要记得给bot足够的prompt context，包括（a）简要的游戏规则，（b）personality，（c）memory -- 记得context只有几k，所以如果过长要summarize某些内容
+- 要有不同的role，狼人，村民，等等。game master开始时要先简略阐明游戏的role

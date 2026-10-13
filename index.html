@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单机多人“狼人杀” - 对话框选择界面</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-window">
+    <!-- 对话框标题栏 -->
+    <div class="window-header">
+      <div class="window-title">
+        <span class="icon">🐺</span>
+        <span>单机模拟多人“狼人杀” (Local LLM Werewolf)</span>
+      </div>
+      <div class="status-tags" id="statusTags">
+        <select id="modelSelector" class="model-select" title="本地 Ollama 模型">
+          <option value="qwen3.5:latest">qwen3.5:latest</option>
+          <option value="llama3.1:8b">llama3.1:8b</option>
+        </select>
+        <span class="tag tag-phase" id="tagPhase">主菜单</span>
+        <span class="tag tag-count" id="tagDialogueCount" style="display: none;">对话: 0/50</span>
+      </div>
+    </div>
+
+    <!-- 核心对话框内容展示区 (Dialogue Log Area) -->
+    <div class="dialogue-box" id="dialogueBox">
+      <div class="message gm-message">
+        <div class="speaker-name">【系统】Game Master</div>
+        <div class="speaker-content">欢迎来到单机“狼人杀”游戏。所有的 Bot 均由本地 Ollama 控制，并具备各自独立的 Personality Markdown 文件。<br>游戏采用经典的对话框选择界面，请在下方选项中进行选择：</div>
+      </div>
+    </div>
+
+    <!-- 底部对话框选择与输入控制区 (Choice Selection Area) -->
+    <div class="choice-box" id="choiceBox">
+      <!-- 动态选项按钮与输入框将在此渲染 -->
+    </div>
+  </div>
+
+  <!-- 隐藏的文件导入器 -->
+  <input type="file" id="importFileInput" accept=".md" style="display: none;">
+
+  <!-- 子对话框弹窗容器 -->
+  <div class="modal-overlay" id="modalOverlay" style="display: none;">
+    <div class="modal-dialog" id="modalDialog">
+      <div class="modal-header">
+        <h3 id="modalTitle">对话框标题</h3>
+        <button class="modal-close" id="btnModalClose">&times;</button>
+      </div>
+      <div class="modal-content" id="modalContent"></div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

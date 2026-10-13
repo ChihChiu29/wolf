@@ -1,0 +1,398 @@
+/* style.css - 经典的对话框选择界面样式 (Dialog Box Selection Interface) */
+
+:root {
+  --bg-dark: #12161f;
+  --bg-window: #1b212c;
+  --bg-message: #222a38;
+  --bg-gm: #1a273b;
+  --border-color: #313d52;
+  --primary-color: #4a88e8;
+  --accent-gold: #e5a93b;
+  --accent-green: #3ab074;
+  --accent-red: #e04b4b;
+  --text-main: #e6ebf5;
+  --text-muted: #8b99ad;
+  --text-thought: #9ea8b6;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* 核心游戏窗口容器 */
+.game-window {
+  width: 100%;
+  max-width: 900px;
+  height: 94vh;
+  background: var(--bg-window);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+/* 顶部窗口标题栏 */
+.window-header {
+  height: 52px;
+  background: #151b24;
+  border-bottom: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  user-select: none;
+}
+
+.window-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+.window-title .icon { font-size: 1.25rem; }
+
+.status-tags {
+  display: flex;
+  gap: 10px;
+}
+
+.tag {
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.tag-phase {
+  background: rgba(229, 169, 59, 0.15);
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+}
+.tag-count {
+  background: rgba(74, 136, 232, 0.15);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+/* 中央对话展示框 (Dialogue Box) */
+.dialogue-box {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #161c26;
+  scroll-behavior: smooth;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-message);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  animation: fadeIn 0.2s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.speaker-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* GM 消息样式 */
+.gm-message {
+  background: var(--bg-gm);
+  border-color: #2b3e58;
+}
+.gm-message .speaker-name {
+  color: var(--accent-gold);
+}
+
+/* Bot 消息样式 */
+.bot-message .speaker-name {
+  color: var(--primary-color);
+}
+
+/* 思考过程呈现 (先思考) */
+.bot-thought {
+  background: rgba(0, 0, 0, 0.25);
+  border-left: 3px solid #586982;
+  padding: 6px 10px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: var(--text-thought);
+  font-style: italic;
+  border-radius: 0 4px 4px 0;
+}
+
+/* 表情与小动作展示 */
+.action-gesture {
+  color: var(--accent-gold);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* 玩家自己发送的消息 */
+.player-message {
+  border-color: rgba(58, 176, 116, 0.4);
+  background: #182820;
+}
+.player-message .speaker-name {
+  color: var(--accent-green);
+}
+
+/* 底部选项选择区 (Choice Box) */
+.choice-box {
+  min-height: 140px;
+  background: #181f2a;
+  border-top: 2px solid var(--border-color);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.btn-choice {
+  padding: 12px 16px;
+  background: #242c3b;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-main);
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-choice:hover {
+  background: #2f3a4e;
+  border-color: var(--primary-color);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.btn-choice .btn-num {
+  color: var(--accent-gold);
+  font-weight: bold;
+}
+
+/* 输入控制栏 */
+.input-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+.text-input {
+  flex: 1;
+  padding: 11px 14px;
+  background: #11161f;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  outline: none;
+}
+.text-input:focus {
+  border-color: var(--primary-color);
+}
+.btn-submit {
+  padding: 11px 22px;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-submit:hover { background: #3b76cf; }
+
+/* 模态对话框 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 580px;
+  background: #1b212c;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+}
+
+.modal-header {
+  padding: 14px 18px;
+  background: #141922;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-header h3 { font-size: 1rem; color: var(--accent-gold); }
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.modal-close:hover { color: #fff; }
+
+.modal-content {
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.modal-actions {
+  padding: 12px 18px;
+  background: #141922;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.textarea-md {
+  width: 100%;
+  min-height: 180px;
+  background: #11161f;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-main);
+  padding: 10px;
+  font-family: monospace;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.list-item {
+  padding: 10px 14px;
+  background: #232b38;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-delete {
+  padding: 4px 10px;
+  background: rgba(224, 75, 75, 0.2);
+  border: 1px solid var(--accent-red);
+  color: var(--accent-red);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.btn-delete:hover { background: var(--accent-red); color: #fff; }
+
+/* 头部模型选择器 */
+.model-select {
+  padding: 3px 8px;
+  background: #11161f;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+}
+.model-select:focus {
+  border-color: var(--primary-color);
+}
+
+/* 夜晚标签 */
+.tag-night {
+  background: rgba(155, 108, 245, 0.15) !important;
+  color: #a77ffc !important;
+  border: 1px solid #8e62ee !important;
+}
+
+/* 性格槽位行 */
+.slot-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #151b24;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+.slot-name {
+  font-weight: 600;
+  color: var(--accent-gold);
+  min-width: 90px;
+}
+.slot-select {
+  flex: 1;
+  padding: 6px 10px;
+  background: #11161f;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-main);
+  outline: none;
+}
+
