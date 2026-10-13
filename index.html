@@ -12,13 +12,24 @@
     <div class="window-header">
       <div class="window-title">
         <span class="icon">🐺</span>
-        <span>单机模拟多人“狼人杀” (Local LLM Werewolf)</span>
+        <span class="main-title">单机模拟多人“狼人杀”</span>
+        <span class="sub-title">(Local LLM Werewolf)</span>
       </div>
       <div class="status-tags" id="statusTags">
-        <select id="modelSelector" class="model-select" title="本地 Ollama 模型">
-          <option value="qwen3.5:latest">qwen3.5:latest</option>
-          <option value="llama3.1:8b">llama3.1:8b</option>
-        </select>
+        <div class="model-select-wrapper" title="本地 Ollama 模型">
+          <span class="model-icon">🤖</span>
+          <select id="modelSelector" class="model-select">
+            <option value="qwen3.5:latest">qwen3.5:latest</option>
+            <option value="llama3.1:8b">llama3.1:8b</option>
+          </select>
+        </div>
+        <button id="btnToggleDebug" class="btn-debug-toggle" title="切换调试模式 (显示/隐藏 Bot 内心思考)">
+          <span class="debug-dot"></span>
+          <span>调试: 关</span>
+        </button>
+        <button id="btnViewLog" class="btn-log-toggle" title="查看游戏实时运行与判决日志">
+          <span>📜 日志</span>
+        </button>
         <span class="tag tag-phase" id="tagPhase">主菜单</span>
         <span class="tag tag-count" id="tagDialogueCount" style="display: none;">对话: 0/50</span>
       </div>
